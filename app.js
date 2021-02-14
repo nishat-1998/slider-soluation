@@ -1,4 +1,3 @@
-  
 const imagesArea = document.querySelector('.images');
 const gallery = document.querySelector('.gallery');
 const galleryHeader = document.querySelector('.gallery-header');
@@ -40,20 +39,20 @@ let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
   element.classList.add('added');
- 
+
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
   } else {
     element.classList.remove('added');
-    sliders.splice(item, 1);
+    sliders.pop(img);
   }
 }
 var timer
 const createSlider = () => {
   // check slider image length
   if (sliders.length < 2) {
-    //alert('Select at least 2 image.')
+    alert('Select at least 2 image.')
     return;
   }
   // crate slider previous next area
@@ -69,10 +68,10 @@ const createSlider = () => {
   document.querySelector('.main').style.display = 'block';
   // hide image aria
   imagesArea.style.display = 'none';
-  let duration = document.getElementById('duration').value || 1000;
+  let duration = document.getElementById('duration').value || 1500;
 
   if(duration < 0) {
-    duration = 2000;
+    duration = 1500;
   }
 
   sliders.forEach(slide => {
@@ -104,7 +103,7 @@ const changeSlide = (index) => {
     index = slideIndex;
   };
 
-  if (index >= items.length){
+  if (index >= items.length) {
     index = 0;
     slideIndex = 0;
   }
@@ -115,6 +114,7 @@ const changeSlide = (index) => {
 
   items[index].style.display = "block"
 }
+
 function showSearchResult() {
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
@@ -126,10 +126,10 @@ function showSearchResult() {
 searchBtn.addEventListener('click', function () {
   showSearchResult();
 })
-searchBtn.addEventListener('click', function (){
+sliderBtn.addEventListener('click', function () {
   createSlider();
 })
-input.addEventListener("keyup", function(event){
+input.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
    event.preventDefault();
    searchBtn.click();
